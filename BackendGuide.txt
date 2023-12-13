@@ -175,84 +175,84 @@ Tweet.insertMany(commentsTweet).then(res=>{
 
 ---------------------------------------------------------------------
 
-****CURD=>next step in product index.js ***
-1.Write this in index.js
-//CURD
-***Route 1 to view All products***
-app.get('/products',async(req,res)=>{
-    const products=await Product.find({})
-    console.log(products);
-    res.send("All Products will be here")
+****************CURD *******************
+1.Write this code in app.js
+//****Route 1 to view All products****
+const Tweet=require('./models/tweets')//Import Tweet
+//Route 1 to view all tweets
+app.get('/tweets',async(req,res)=>{
+    const tweets=await Tweet.find({})
+    console.log(tweets);
+    res.send("All Tweets will be here")
 })
-2.Go to git bash(node)->nodemon index.js
+
+2.Go to git bash(node)->nodemon app.js
 3.Go to browser and search=>localhost:3000/products
 
-**in views**
-1.Make a folder in views name (products)
-2.In products folder make-> index.ejs (html folder)
-3.write code in index.ejs
+************Now make EJS (html) file **********
+1.Make a folder (views) in (Tweets) folder
+2.Make a comments folder in views
+3.In comments folder make-> home.ejs (html folder)
+4.write code in home.ejs
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Products</title>
+    <title>All Tweets</title>
 </head>
 <body>
-    <h1>All Products!</h1>
+        <h1>All Tweets!</h1>
     <ul>
-        <%for (let product of products){%>
-            <!-- <li><%=product.name%></li> -->
-             <li><a href="/products/<%= product._id %>"><%= product.name %></a></li>
+        <%for (let tweet of tweets){%>
+
+             <li><a href="/tweets/<%= tweet._id %>"><%= tweet.name %></a></li>
 
         <%}%>
     </ul>
     
 </body>
 </html>
-4.IN index.js write code 
 
-**Find product and get name of all product**
-app.get('/products',async(req,res)=>{
-    const products=await Product.find({})
-    <!-- console.log(products); -->
-
-    <!-- res.send("All Products will be here") -->//Do not use send 
-    res.render('products/index',{products})//use this to render index.ejs(html file) to localhost
-    
+5.**Find and get all Tweets**
+//Route 1 to view all tweets
+app.get('/tweets',async(req,res)=>{
+    const tweets=await Tweet.find({})
+    res.render('comments/home',{tweets})//use this to render home.ejs(html file) from views folder to localhost:3000/tweets
 })
-*** Route 4 html Show particular  details about  a product***
-5.Make a show.ejs(html file) in views/products folder
-6.Write this code in show.ejs
+
+*** Route 4 html Show particular  details about  a tweet***
+6.Make a details.ejs(html file) in views/comments folder
+7.Write this code in show.ejs
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%product.name%></title>
+    <title><%tweet.name%></title>
 </head>
 <body>
-    <h1><%=product.name%></h1>
+     <h1><%=tweet.name%></h1>
     <ul>
-        <li>Price:<%=product.price%></li>
-        <li>Category:<%=product.category%></li>
+        <li>Ratings:<%=tweet.price%></li>
+        <li>About Tweet:<%=tweet.category%></li>
         
     </ul>
      <!-- link to go back -->
-    <a href="/products">All Products</a>
+    <a href="/tweets">All Tweets</a>
 </body>
 </html>
 
-7.******Route 4 to view perticular Product details*****
-
-app.get('/products/:id',async(req,res)=>{
+8.******Route 4 setup to view perticular Tweet details*****
+//Route 4 to view Particular Tweet details
+app.get('/tweets/:id',async(req,res)=>{
     const {id}=req.params;
-    const product = await Product.findById(id)
-    res.render('products/show',{product})
+    const tweet= await Tweet.findById(id) //this const tweet is used in details.esj as tweet.name 
+    res.render('comments/details',{tweet})
 })
 
 
-8.***Route 2 to Create new Product*****
+9.***Route 2 to Create new New*****
 //Route 2 to create a new product it is use to redner thr form from new.ejs
 app.get('/products/new',(req,res)=>{
     res.render('products/new',{categories})

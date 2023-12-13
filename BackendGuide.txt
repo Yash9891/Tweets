@@ -302,46 +302,50 @@ app.post('/tweets',async(req,res)=>{
 
 
 -------------------------------------------------------------------------------
-***Route 5  to update all dedails in the product ****
-1.In index.js 
-app.get('/products/:id/edit',async(req,res)=>{
+***Route 5  to update all dedails in the Tweet ****
+1.In app.js 
+//Route 5 to Update all details of the Tweet
+app.get('/tweets/:id/edit',async(req,res)=>{
     const {id}=req.params;
-    const product = await Product.findById(id)
-    res.render('products/edit',{product,categories})
+    const tweet = await Tweet.findById(id)
+    res.render('comments/edit',{tweet,categories})
 })
-//update only single value of product
-//as we know we cannot use the put request directly so we need to install method override in node index.js
-app.put('/products/:id',async(req,res)=>{
+//Route 6  this root is trigger by the form when we submit it '/tweets/:id'
+app.put('/tweets/:id',async(req,res)=>{
     const {id}=req.params;
-    const product=await Product.findByIdAndUpdate(id,req.body,{runvalidators:true,new:true})
-    res.redirect(`/products/${product._id}`)
+    const tweet=await Tweet.findByIdAndUpdate(id,req.body,{runvalidators:true,new:true})
+    res.redirect(`/tweets/${tweet._id}`)
 
 })
+
+//as we know we cannot use the put request directly so we need to install method override in node app.js
+
 2. To use put-> npm i method-override (in git bash)
-3. //to use put request in index.js
+3. //to use put request in app.js
 ->const methodOverride=require('method-override')
 ->app.use(methodOverride('_method'))
-4.make edit.ejs in veiws/products folder
+4.make edit.ejs in veiws/comments folder
 5. write code in edit.ejs
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Product</title>
+    <title>Edit</title>
 </head>
 <body>
-    <h1>Edit Product</h1>
-    <form action="/products/<%=product._id%>?_method=PUT" method="POST"> 
+    <h1>Edit Tweet</h1>
+    <form action="/tweets/<%=tweet._id%>?_method=PUT" method="POST"> 
         
-        <label for="name">Product Name</label>
-        <input type="text" name="name" id="name" placeholder="product name" value="<%=product.name%>">
-        <label for="price">Price</label>
-        <input type="number" id="price" name="price" placeholder="product price" value="<%=product.price%>">
-        <label for="category">Category</label>
+        <label for="name">Tweet</label>
+        <input type="text" name="name" id="name" placeholder="tweet" value="<%=tweet.name%>">
+        <label for="price">Ratings</label>
+        <input type="number" id="price" name="price" placeholder="ratings" value="<%=tweet.price%>">
+        <label for="category">About Tweet</label>
         <select name="category" id="category">
+       
             <% for(let category of categories) { %>
-                <option value="<%= category %>" <%= product.category===category?'selected':''%>><%= category %></option>
+                <option value="<%= category %>" <%= tweet.category===category?'selected':''%>><%= category %></option>
             <% } %>
         </select>
         <button>Submit</button>
@@ -349,52 +353,55 @@ app.put('/products/:id',async(req,res)=>{
     
 </body>
 </html>
-6.write this code in show.ejs for link->
- <a href="/products/<%=product._id%>/edit">Edit Products</a>
+
+6.write this code in details.ejs for link->
+ <a href="/tweets/<%=tweet._id%>/edit">Edit Tweets</a>
 7. Add link in edit.ejs
-<a href="/products/<%=product._id%>">Cancel edit</a>
+<a href="/tweets/<%=tweet._id%>">Cancel Edit</a>
 
 8.//To show the previous category option  during edit the product
-->const categories=['fruit','vegetable','dairy','mashroom'];
+->const categories=['good','verygood','notgood']; //in app.js
 
-8.Delete
-**Route 6 delete**
-app.delete('/products/:id',async(req,res)=>{
+
+*********Route 7 to Delete**********
+1.In app.js
+//Route 7 to Delete Tweet
+app.delete('/tweets/:id',async(req,res)=>{
     const {id}=req.params;
-    const deleteProduct=await Product.findByIdAndDelete(id)
-    res.redirect('/products');
+    const deletetweet=await Tweet.findByIdAndDelete(id)
+    res.redirect('/tweets');
 
 })
-9.Add code in show.ejs
-<form action="/products/<%=product._id%>?_method=DELETE" method="POST">
+2.Add code in details.ejs
+<!-- Delte tweet -->
+    <form action="/tweets/<%=tweet._id%>?_method=DELETE" method="POST">
         <button>Delete</button>
     </form>
 
-    ***Filter by category
-    1.change in index.js
+****************Filter by category*******************************
+1.change in app.js
     
-//CURD
-//Route 1 to view all products using product.find()
-app.get('/products',async(req,res)=>{
-   //to show the all products related to same category
+//Route 1 to view all tweets
+app.get('/tweets',async(req,res)=>{
+    //to show the all Tweets related to same About Tweet(category)
    const {category}=req.query;
    if(category){
-    const products=await Product.find({category})
-    res.render('products/index',{products,category})
+    const tweets=await Tweet.find({category})
+    res.render('comments/home',{tweets,category})
 
    }else{
-    const products=await Product.find({})
-    res.render('products/index',{products,category:"All"})//rednring index.ejs(html file) on localhost  and passing all the products on index.ejs
-
+    const tweets=await Tweet.find({})
+    // console.log(tweets);
+    // res.send("All Tweets will be here")
+    res.render('comments/home',{tweets,category:"ALL"})//use this to render home.ejs(html file) from views folder to localhost:3000/tweets
    }
-
-    
-    // console.log(products);
-    // res.send("All Products will be here")
     
 })
-2.add link to all product in show.wjs
-    <a href="/products/<%=product._id%>/edit">Edit Products</a>
+2.Change ul list  in details.ejs
+<li>About: <a href="/tweets?category=<%= tweet.category %>"><%= tweet.category %></a></li>
+3.Add this in home.ejs
+<a href="/tweets/new">New Tweet</a>
+
 
 
 

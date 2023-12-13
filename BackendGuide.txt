@@ -80,13 +80,13 @@ app.listen(3000,()=>{
 7.localhost:3000  ->search in browser
 
 ***Mongoose Model Setup***
-11.Add this code aslo for mongo connection
+8. Add this code also for mongo connection in app.js
 const express=require("express");
 const app=express();
 const path=require('path');
 //Mongo connection
 const mongoose =require('mongoose')
-mongoose.connect('mongodb://127.0.0.1:27017/moviesApp').then(()=>{
+mongoose.connect('mongodb://127.0.0.1:27017/tweetApp').then(()=>{
     console.log("Mongo Connection Open!!");
 }).catch(err=>{
     console.log("OHH no Mongo connection error");
@@ -95,12 +95,12 @@ mongoose.connect('mongodb://127.0.0.1:27017/moviesApp').then(()=>{
 })
 
 ***Create Models***
-1.Make a folder name(models) in folder (MongoExpress)
-2.Make **product.js** in models folder
-3.Write this code to create models
+1.Make a folder name(models) in folder (Tweets)
+2.Make **tweets.js** in models folder
+3.Write this code to create models in (tweets.js)
 const mongoose=require('mongoose');
 //Creating models 
-const productSchema=new mongoose.Schema({
+const tweetSchema=new mongoose.Schema({
     name:{
         type:String,
         required:true
@@ -113,113 +113,67 @@ const productSchema=new mongoose.Schema({
     category:{
         type:String,
         lowercase:true,
-        enum:['fruit','vegetable','dairy']
+        enum:['good','verygood','notgood']
     }
 })
 
-const Product=mongoose.model('Product',productSchema);
-module.exports=Product;
+const Tweet=mongoose.model('Tweet',tweetSchema);
+module.exports=Tweet;
 
-4.Make **seeds.js** file in MongoExpress(folder)
-5.Write code in seeds.js
+4.Make **comments.js** file in (Tweets) folder
+5.Write code in (comments.js)
 //creating models and require it in here
-const Product=require('./models/product')
-
-//Mongo connection
+const Tweet=require('./models/tweets')
 const mongoose =require('mongoose')
-mongoose.connect('mongodb://127.0.0.1:27017/farmStand').then(()=>{
+mongoose.connect('mongodb://127.0.0.1:27017/tweetApp').then(()=>{
     console.log("Mongo Connection Open!!");
 }).catch(err=>{
     console.log("OHH no Mongo connection error");
     console.log(err);
 
 })
-const p =new Product({
-    name:"Ruby grapefruit",
-    price:1.99,
-    category:'fruit'
-
-})
-p.save().then(p=>{
-    console.log(p);
-}).catch(e=>{
-    console.log(e);
-})
-6.Open git bash in MongoExpress Folder
-7.(node seed.js) in git bash
-
-***Check(Express+Mongoose) farmStand in MongoDb***
-1.OPen another git bash in MongoExpress(folder)
-2.mongosh
-3.use farmStand
-4.shows collections
-5.db.products.find()
-
-6.**In seeds.js**
-1.Write code to create multiple prodtuct at a time
-//creating models and require it in here
-const Product=require('./models/product')
-
-//Mongo connection
-const mongoose =require('mongoose')
-mongoose.connect('mongodb://127.0.0.1:27017/farmStand').then(()=>{
-    console.log("Mongo Connection Open!!");
-}).catch(err=>{
-    console.log("OHH no Mongo connection error");
-    console.log(err);
-
-})
-
-//make Product one at a time******************
-// const p =new Product({
-//     name:"Ruby grapefruit",
-//     price:1.99,
-//     category:'fruit'
-
-// })
-// p.save().then(p=>{
-//     console.log(p);
-// }).catch(e=>{
-//     console.log(e);
-// })
 
 //Other method :Use insertMany method  to create many  Product 
-const seedProducts=[
+const commentsTweet=[
     {
-        name:"Fairy Eggplant",
+        name:"This is nice",
         price:1.00,
-        category:"vegetable"
+        category:"good"
     },
     {
-        name:"Organig Melon",
+        name:"This is wrong",
         price:2.00,
-        category:"vegetable"
+        category:"verygood"
     },
     {
-        name:"Carrot",
-        price:2.80,
-        category:"vegetable"
+        name:"I love to GoodZilaa.",
+        price:4.00,
+        category:"verygood"
     },
     {
-        name:"Mango",
-        price:1.80,
-        category:"fruit"
-    },
-    {
-        name:"Milk",
-        price:1.20,
-        category:"dairy"
-    },
-
+        name:"I dont like Superman.",
+        price:3.00,
+        category:"notgood"
+    }
 
 ]
-Product.insertMany(seedProducts).then(res=>{
+Tweet.insertMany(commentsTweet).then(res=>{
     console.log(res);
 }).catch(e=>{
     console.log(e);
 })
-2.Open gitbash(node)->node seeds.js
-3.OPen gitbash(mongosh)->db.products.find()
+
+6.Open git bash (node comments.js)
+
+7.***Check(Express+MongoDB) farmStand in MongoDb***
+1.Open another git bash in Tweets (Folder)
+2.mongosh ->in git bash
+3.use tweetApp 
+4.shows collections
+5.db.tweets.find()
+
+
+---------------------------------------------------------------------
 
 ****CURD=>next step in product index.js ***
 1.Write this in index.js

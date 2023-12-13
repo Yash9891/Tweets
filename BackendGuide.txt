@@ -1,196 +1,22 @@
-1.Make git hub account 
-2.Download Git bash in window
-3.OPen Git bash terminal and do som commands
-->git --version
-->git config --global user.name"Yash9891"
-->git config --global user.email"yash042002@gmail.com"
-->git config --list
-4.Open vs code 
-5.Now type git --version on vs code
-6.Make a folder on vs code
-(Add git hub code to vs code)
-7.OPen git hub and copy repository from git hub by copy https link
-8.->git clone <paste https link> on vs terminal
-9.->git status
-10.Make new contact.html file on github project folder
-11.->git status, show untracked file
-12.Add some changes on index.html
-13.->git status , show untracked file contact.html and modified file index.html
-14.->git add contact.html or ->git add .
-15.->git status, show staged file contact.html and index.html
-16.->git commit -m "Add git demo"
-(Add vs code to Github)
-17.->git push origin main, first time it will show you to connect vs code to github
-It will add all your files in github(remote) directly from your local(window system)
 
-(******To upload file directly from local computer to github remote********)
-(Make new file on Git Demo on vs local machine)
-18.->cd ..               => One step back to git demo folder from current folder
-19.->mkdir Localdemo     =>make new folder in git demo folder
-20.->cd Localdemo
-21.->git init
-(make index.html or style.css)
-22.Do some code in them 
-23.->git add .   ( to add all untracked files)
-24.->git status
---.->git commit -m "Add git demo"
-25.Now make repo on git hub
-26.Copy https from github
-27.->git remote add origin <paste https links>
-28.->git remote -v (to check it connected to git or not)
-29.->git branch (it show master branch)
-30.->git branch -M main   (to change name master to main )
-31.->git push -u origin main   (-u is use as a shortcut so that you don't need to write origin main (->git push))
+                                                       ***************BACKEND GUIDE*********************
 
+***GET AND POST request***
 
+=>GET requests are primarily used for data fetching form server where the parameters are visible in the URL
+=>POST requests are used for submitting data to the server in a way that's not visible in the URL and is suitable for larger data sets and sensitive information.
 
-(********Branch*********)
-1.->git branch
-2->git checkout -b feature1   (create new feature2 branch)
-3.->git checkout -b feature2 
-4.-> git branch -d feature1   (delete feature1)
-5.-> git checkout feature2( we are currently on branch feature2)
-6.-> Now cange some code in index.html
-7.->git status
-8.->git add .
-9.->git commit -m "add new featuere"
-10.git push origin feature2( It will add new paragaph in index.html in feature2 branch on github)
-11.->git diff main  (to compare the changes in main and feature2 branch)
-12.Press q to exit
-*********************************
-13.(To merge main and feature2 branch go to github than merge the branches)
-***********************************
-(****To download all the changes form remote github to local vs code)
-14.->git pull origin main
-
-(resolve merge conflict ->if changes occur in same lines in code on both branch)
-25.->git status
-(do some changes in index.html on both branches)
-26.->git add .  (add changes one by one in both branch)
-27.->git commit -m "commit for both mainand feature2 branch seperately one by one "
-28.->git checkout feature2
-(Now add changes in feature2 branch)
-29.->git diff main (It show conflict error in vs code  than you need to solve on vs code)
-30.->git add .
-31.->git commit -m "Add both feature"
-32.->git checkout main
-33.->git merge feature2 (it merge the changes of feature2 branch in main branch automatically)
-34.->git push
-
-
-(**********Undo changes********)
-1.Do some changes in index.html
-2.->git add .
-3.->git reset index.html
-4.->git reset ( to undo all changes)
-5.->git status
-
-(if we do commit also)
-1.Do some changes in index.html
-2.->git add .
-3.->git commit -m "delete button"
-4.->git reset HEAD~1
-5.->git log ( It shows all the commits )
-6.->copy the commit in which you want to go back
-7.-> git reset 757c93e499888fcf7e7bd721860b1fe60ed3d8c0 (It will take you to the previous change like before button)
-8.->git reset --hard 757c93e499888fcf7e7bd721860b1fe60ed3d8c0 (If you want to show the undo in vs code also)
-
-
-**********Fork ********
-It is used to copy the repo of other projects on github to your github acount and then you can to changes in the repo and than pull request to merge the changes form  your main branch to the other repo branch
-
-
-
-*********************Backend*********************
-******Npm modeules packages install in file******
-
-1.create a folder name jokester
-2.inside jokester open git bash here
-3.in git bash run command ---  mkdir artser
-4.cd artser
-5.npm init
-6.it will create package.joson 
-7. name the author in npm init questions
-8.now download any package from npm ---  npm i figlit    it will create node module in artser
-9.--touch index.js  in aster on git bash
-10. 
-// const figlet=require("figlet"); 
-// const colors=require("colors")
-// figlet("Hello World!!",function(err,data){
-//     if(err){
-//         console.log("Something went wrong...");
-//         console.dir(err);
-//         return;
-//     }
-//     console.log(data.green);
-// })
-11. node index.js
-
-
-
-********************Express*******************
-
-1.Make a folder name Express
-2.OPen git bash in it
-3.mkdir Firstapp in git bash
-4.cd Firstapp
-5.npm init -y
-6.Insatll Express --npm i Express
-7.make index.js file ---- touch index.js
-8.write code in index.js
-const express=require("express");
-const app=express()
-app.use((req,res)=>{
-    console.log("We got a new request");
-    res.send("<h1>This is my webpage</h1>")
-})
-app.listen(8000,()=>{
-    console.log("Listining on port 3000");
-})
-9.node index.js 
-10.Open chrome and search --localhost:8000
-11.It shows the This is my webpage in webpage
-12.You can also get request it on postman 
-
-
-****If you want to change the updates in index.js automatically***
-1.npm i -g nodemon --- run this in git bash in the folder
-2.nodemon -v
-3.nodemon index.js 
-no if you do any change in index.js it will automatically re run the local host 
-
-
-****Ejs (Dynamic html)*****
-1.make folder -dynamic html
-2.npm init -y
-3.npm i express
-4.touch index.js
-const express =require('express');
-const app=express();
-
-app.set('view engine','ejs');
-
-app.get('/',(req,res)=>{
-    res.send("Hi there")
-})
-app.listen(4000,()=>{
-    console.log("Listening on port 4000");
-})
-5.nodemon index.js
-6.npm i ejs
-7.mkdir views
-8.touch views/homedir.ejs
-
-
-//***************GET AND POST request*********************
-
-->GET requests are primarily used for data fetching form server where the parameters are visible in the URL
-->POST requests are used for submitting data to the server in a way that's not visible in the URL and is suitable for larger data sets and sensitive information. 
 In summary, GET requests are commonly used for retrieving resources like web pages or specific data from a server, while POST requests are used to send data to a
 server to create, update, or modify resources (such as submitting a form with user details). 
 
+****Express and Databse(MongoDB)***
+=>Express : Express is a popular web application framework for Node.js used primarily for building server-side applications
+=>Mongoose : Mongoose is an Object Data Modeling (ODM) library for MongoDB in Node.js. It provides a straightforward schema-based solution to model your application data.
+=>EJS : EJS is a templating language for Node.js that embeds JavaScript within HTML to create dynamic web pages by integrating data, logic, and HTML structure in a single file.
 
-/*
+****CURD(Create,Update,Read,Delete)
+
+Routes:
 GET /comments-list all comments
 GET /comments/new - form to create new comment
 POST /comments-create a new comment on server
@@ -199,10 +25,10 @@ GET /comments/:id/edit - form to edit spefic comment
 PATCH /comments/:id- update one comment on server
 DELETE /comments/:id - Delete one comment on server
 
-*/
 
 
-*************Database   Mongodb************************
+
+*************Database   Mongodb******************
 It is No-sql database- means it do not store tha data in a structured way in a table like Sql database.
 
 Mongo is commonly used in node and express.
@@ -213,49 +39,12 @@ Mongo is commonly used in node and express.
 4.Type--> mongosh command in git bash
 5.To exit --> Ctr+c  or .exit
 6.To Create database
-7.->use godzilla
-8.->db 
-9.->show dbs  (It show the databases)
-
-
-*****CRUD****Create,Read,Update,Delete****
-*****1.Insertion in Mongo Db******
-1.Open git bash
-2.->mongosh
-3.->use animalShelter
-4.->db
-5.show collections
-6.db.dogs.insertOne({name:"kutta",age:67,bread:"sali"})
-7.->show collections
-8.->db.dogs.find()
-9.MongoDb automatically create the object ID
-
-***insert***
-db.dogs.insert([{name:"kutta",age:67,bread:"sali"},{name:"kutta",age:67,bread:"sali"}])
-
-****2.Finding with Mongo****
-1->db.dogs.find()
-2.->db.dogs.find({name:"kutta"})
-3.->db.dogs.findOne({name:"kutta"})
-
-***3.Update with mongo****
-1.db.dogs.find()
-2.db.dogs.updateOne({name:"kutta"},{$set:{age:33,breed:"koko"}})
-3.db.dogs.find({name:"kutta"})
-****updatemany***
-4.db.dogs.updateMany({name:"kutta"},{$set:{isAvailable:false}})
-
-5.db.dogs.updateOne({name:"kutta"},{$set:{age:33},$currentDate:{lastChnagesd:true}})
-6.db.dogs.findOne()
-
-****4.Delete with mongo*****
-
-1.db.dogs.deleteOne({name:"kutta"})
-2.db.dogs.deleteMany({name:"kutta"})
-
+7.->use farmStand
+8.->show dbs  (It show the databases)
+9.->db.products.find()
 
 **********Mongoose***********(ODM-Obejct data mapper)
-Use to connect mongo with nodeJs
+One of the popular libraries for MongoDB object modeling in Node.js is Mongoose.
 
 ***downloading mongoose and connect it to javascript without express app***
 1.Make an empty folder
@@ -263,77 +52,34 @@ Use to connect mongo with nodeJs
 3.->ls
 4.->npm init -y
 5.->npm i mongoose
-6.->touch index.js
-7.Write code in index.js:
-const mongoose =require('mongoose')
-mongoose.connect('mongodb://127.0.0.1:27017/shopApp').then(()=>{
-    console.log("Connection Open!!");
-}).catch(err=>{
-    console.log("OHH no error");
-    console.log(err);
 
-})
-const productSchema=new mongoose.Schema({
-    name:{
-        type:String,
-        required:true
-    },
-    price:{
-        type:Number,
-        required:true
-    }
-})
-
-const Product=mongoose.model("Product",productSchema);
-const bike=new Product({name:"Mountain Bike",price:599})
-bike.save().then(data=>{
-    console.log("IT worked");
-    console.log(data);
-}).catch(err=>{
-    console.log('Oh no errr');
-    console.log(err);
-})
-8.Now ->node product.js in git bash
-9.in git bash write this:-node -i -e "$(< index.js)"
-
-***connect it to mongo***
-1.Open another git bash
-2.Type--> mongosh command in git bash
-3.->show dbs  
-4.->use shopApp
-5.->db.products.find()
-
-
-***Mongoose to Express***
+**********************************************************Tweets Backend Project*************************************************************************
 
 ***Express App Setup**
-Make a folder name -MongoExpress
-1.ls
-2.npm init -y
-3.npm i express
-4.touch **index.js**
-5.npm i ejs
-6.npm i mongoose 
-7.mkdir views
-8.Write this in index.js to check connection is establish or not
+1.Make a folder name(Tweets)
+2.Open git bash in here
+3.In git bash type command (npm i express mongoose ejs)
+4.Open vs code and make a file (app.js) in (Tweets)
+5.Write code in app.js =>It is our server side code with Express 
+->(app.js)
 const express=require("express");
 const app=express();
 const path=require('path');
 
 app.set('views',path.join(__dirname,'views'));
 app.set("view engine",'ejs');
-app.get('/dog',(req,res)=>{
-    res.send("Kutta")
+app.get('/',(req,res)=>{
+    res.send("Hello Gojira")
 })
 
 app.listen(3000,()=>{
     console.log("App is listning on port 3000!");
 })
 
-9.nodemon index.js ->in git bash
-10.localhost:3000/dog  ->search in browser
+6.nodemon index.js ->in git bash
+7.localhost:3000  ->search in browser
 
-***Mongoose Setup***
+***Mongoose Model Setup***
 11.Add this code aslo for mongo connection
 const express=require("express");
 const app=express();

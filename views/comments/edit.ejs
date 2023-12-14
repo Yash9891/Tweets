@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+
+</head>
+<body>  
+  
+ 
+
+    <h1>Edit Tweet</h1>
+    <form action="/tweets/<%=tweet._id%>?_method=PUT" method="POST"> 
+        
+        <label for="name">Tweet</label>
+        <input type="text" name="name" id="name" placeholder="tweet" value="<%=tweet.name%>">
+        <label for="price">Ratings</label>
+        <input type="number" id="price" name="price" placeholder="ratings" value="<%=tweet.price%>">
+        <label for="category">About Tweet</label>
+        <select name="category" id="category">
+       
+            <% for(let category of categories) { %>
+                <option value="<%= category %>" <%= tweet.category===category?'selected':''%>><%= category %></option>
+            <% } %>
+        </select>
+        <button>Submit</button>
+    </form>
+
+    <a href="/tweets/<%=tweet._id%>">Cancel Edit</a>
+
+
+    
+</body>
+</html>

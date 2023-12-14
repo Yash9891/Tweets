@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%tweet.name%></title>
+
+</head>
+<body>
+   
+
+    
+    <h1><%=tweet.name%></h1>
+    <ul>
+        <li>Ratings:<%=tweet.price%></li>
+        <!-- <li>About Tweet:a<%=tweet.category%></li> -->
+        <li>About: <a href="/tweets?category=<%= tweet.category %>"><%= tweet.category %></a></li>
+        
+    </ul>
+    <!-- Delte tweet -->
+    <form action="/tweets/<%=tweet._id%>?_method=DELETE" method="POST">
+        <button>Delete</button>
+    </form>
+
+     <!-- link to go back -->
+    <a href="/tweets">All Tweets</a>
+    <a href="/tweets/<%=tweet._id%>/edit">Edit Tweets</a>
+
+    
+    
+</body>
+</html>
